@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MainContainer from './Components/MainContainer';
 const App = () => {
+  // useEffect(() => {
+  //   fetch('/api')
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setBackendData(data);
+  //     });
+  // });
+
   return (
     <div>
       <MainContainer />
-      <h1>Hello React</h1>)
     </div>
   );
 };

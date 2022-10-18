@@ -1,11 +1,13 @@
 {
   "name": "solo-project",
   "version": "1.0.0",
+  "proxy": "http://localhost:5000/",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server/server.js",
     "serve": "webpack serve --mode development",
-    "build": "webpack --mode production",
+    "build": "webpack serve --mode production",
     "dev": "nodemon server"
   },
   "repository": {
