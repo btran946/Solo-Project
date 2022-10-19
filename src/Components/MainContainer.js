@@ -18,7 +18,6 @@ const MainContainer = () => {
         todoID={todoID}
         setTodoID={setTodoID}
       />
-      <TodoItemsContainer arrOfTodos={arrOfTodos} setTodos={setTodos} />
     </div>
   );
 };

@@ -1,24 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const TodoItems = ({ content, id, completed, arrOfTodos, setTodos }) => {
+const TodoItems = ({ content, id, completed, arrOfTodos, setTodos, todo }) => {
+  const [edit, setEdit] = useState(false);
+  const [updateInput, setUpdateInput] = useState(content);
   const handleDelete = (e) => {
     e.preventDefault();
-    console.log(e);
-    console.log(`TodoItem Key: ${e.target.parentElement.id}`);
-    const updatedArr = arrOfTodos.filter(
-      (todo) => todo.id !== e.target.parentElement.id
-    );
+    const updatedArr = arrOfTodos.filter((item) => item.id !== todo.id);
     setTodos(updatedArr);
-    console.log(updatedArr);
+  };
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    setEdit(true);
+  };
+
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+    setUpdateInput(e.target.value);
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    setEdit(false);
+    const newArr = [];
+    arrOfTodos.forEach((item) => {
+      if (item.id === todo.id) {
+        item.content = updateInput;
+      }
+      newArr.push(item);
+    });
+
+    setTodos(newArr);
   };
 
   return (
     <div>
-      <div id={id} completed={completed}>
-        <h1>{content}</h1>
-        <button>edit</button>
-        <button onClick={handleDelete}>delete</button>
-      </div>
+      {edit ? (
+        <div id={id} completed={completed}>
+          <form>
+            <input onChange={handleOnChange} type='text' value={updateInput} />
+            <button onClick={handleUpdate}>update</button>
+          </form>
+        </div>
+      ) : (
+        <div id={id} completed={completed}>
+          <h3>{content}</h3>
+          <button onClick={handleEdit}>edit</button>
+          <button onClick={handleDelete}>delete</button>
+        </div>
+      )}
     </div>
   );
 };

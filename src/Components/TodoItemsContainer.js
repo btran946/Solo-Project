@@ -1,21 +1,16 @@
-import React from 'react';
-import TodoItems from './TodoItems';
+// import React, { useState } from 'react';
+// import TodoItems from './TodoItems';
 
-const TodoItemsContainer = ({ arrOfTodos, setTodos }) => {
-  const todos = [];
-  arrOfTodos.forEach((todo) => {
-    todos.push(
-      <TodoItems
-        content={todo.content}
-        key={todo.id}
-        id={todo.id}
-        completed={todo.completed}
-        arrOfTodos={arrOfTodos}
-        setTodos={setTodos}
-      />
-    );
-  });
-  return <div>{todos}</div>;
-};
+// const TodoItemsContainer = ({
+//   arrOfTodos,
+//   setTodos,
+//   todoInput,
+//   setTodoInput,
+// }) => {
+//   const [edit, setEdit] = useState(false);
+//   const [editInput, setEditInput] = useState(edit ? )
 
-export default TodoItemsContainer;
+//   return ;
+// };
+
+// export default TodoItemsContainer;
