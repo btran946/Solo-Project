@@ -13,11 +13,10 @@ module.exports = {
     }),
   ],
   devServer: {
-    host: 'localhost',
     port: 3000, // you can change the port
     hot: false,
     proxy: {
-      '/api': 'http://localhost:5000/',
+      '/api': 'http://localhost:4000/',
     },
   },
   module: {

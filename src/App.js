@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import MainContainer from './Components/MainContainer';
 const App = () => {
-  // useEffect(() => {
-  //   fetch('/api')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setBackendData(data);
-  //     });
-  // });
+  useEffect(() => {
+    fetch('http://localhost:4000/')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+  });
 
   return (
     <div>
