@@ -10,6 +10,10 @@ app.get('/', (req, res) => {
   res.json({ hello: 'from' });
 });
 
+app.post('/', (req, res) => {
+  res.send('hello');
+});
+
 app.listen(PORT, () => {
   console.log('Server started on port 4000');
 });
