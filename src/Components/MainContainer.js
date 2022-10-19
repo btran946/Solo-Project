@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Form from './Form';
 import Header from './Header';
 import TodoItemsContainer from './TodoItemsContainer';
+
 const MainContainer = () => {
   const [todoInput, setTodoInput] = useState('');
   const [arrOfTodos, setTodos] = useState([]);
@@ -17,7 +18,7 @@ const MainContainer = () => {
         todoID={todoID}
         setTodoID={setTodoID}
       />
-      <TodoItemsContainer arrOfTodos={arrOfTodos} />
+      <TodoItemsContainer arrOfTodos={arrOfTodos} setTodos={setTodos} />
     </div>
   );
 };
