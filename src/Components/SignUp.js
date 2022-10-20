@@ -25,18 +25,18 @@ const SignUp = () => {
         username: userName,
         password: passWord,
       })
-      .then((response) => console.log(response))
+      .then((response) => console.log('error in handleSignup'))
       .catch((err) => {
-        console.log(error);
+        console.log(err.response.data);
       });
   };
 
   return (
     <div>
       <form>
-        <label for='username'>Username</label>
+        <label htmlFor='username'>Username</label>
         <input onChange={handleUsernameInput} name='username' type='text' />
-        <label for='password'>Password</label>
+        <label htmlFor='password'>Password</label>
         <input onChange={handlePasswordInput} name='password' type='text' />
         <button onClick={handleSignUp}>Sign Up!</button>
       </form>

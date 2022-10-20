@@ -3,15 +3,19 @@ const express = require('express');
 const app = express();
 const PORT = 4000;
 const cors = require('cors');
+const usersController = require('./usersController');
+
 app.use(cors());
 app.use(express.static(__dirname + '/solo-project'));
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.json({ hello: 'from' });
 });
 
-app.post('/', (req, res) => {
-  res.send('hello');
+app.post('/', usersController.addUser, (req, res) => {
+  console.log('user created');
+  return res.status(200).json({});
 });
 
 app.listen(PORT, () => {
