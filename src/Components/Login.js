@@ -42,7 +42,7 @@ const Login = ({ isLoggedIn, setLoggedIn, setCurrentUser, currentUser }) => {
   return (
     <div className='login'>
       <h1>
-        what<a>Todo?</a>
+        what<a>ToDo?</a>
       </h1>
       <form className='loginForm'>
         <label htmlFor='usernameLogin'>Username</label>

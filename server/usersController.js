@@ -8,6 +8,7 @@ usersController.addUser = async (req, res, next) => {
   try {
     if (username && password) {
       const user = await Users.Account.create(req.body);
+
       return next();
     } else throw 'ERROR in addUser';
   } catch (err) {
@@ -19,6 +20,23 @@ usersController.addUser = async (req, res, next) => {
   }
 };
 
+usersController.getIdOfTodoLists = async (req, res, next) => {
+  const { username } = req.body;
+  const user = await Users.Account.findOne({ username: username });
+  const arrOfListId = user.todoLists;
+  const idArr = [];
+  arrOfListId.forEach((el) => {
+    idArr.push(el[0].valueOf());
+  });
+  const arrOfList = [];
+  for (let i = 0; i < idArr.length; i++) {
+    const list = await Users.TodoList.findOne({ id: idArr[0] });
+    arrOfList.push(list.listOfTodoLists);
+  }
+  res.locals.arrOfList = arrOfList;
+  next();
+};
+
 usersController.saveTodoList = async (req, res, next) => {
   const { username, todoList } = req.body;
   console.log(req.body);
@@ -26,6 +44,7 @@ usersController.saveTodoList = async (req, res, next) => {
   console.log('user found!');
   const newTodoList = new Users.TodoList({ listOfTodoLists: todoList });
   user.todoLists.push(newTodoList);
+  await newTodoList.save();
   await user.save();
   console.log('list saved!');
   next();

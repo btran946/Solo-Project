@@ -59,7 +59,8 @@ const Form = ({
   });
 
   return (
-    <div>
+    <div className='formContainer'>
+      <h2>{currentUser ? currentUser : 'Brian'}'s ToDoList:</h2>
       <form id='todo-form'>
         <div>
           <input

@@ -26,9 +26,9 @@ const accountsSchema = new Schema({
 const Account = mongoose.model('Account', accountsSchema);
 
 const indvidialTodoSchema = new Schema({
-  content: String,
-  completed: Boolean,
-  id: Number,
+  content: { type: String, required: true },
+  completed: { type: String, required: true },
+  id: { type: Number, required: true },
 });
 
 const todoListSchema = new Schema({

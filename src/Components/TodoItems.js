@@ -61,28 +61,36 @@ const TodoItems = ({ content, id, completed, arrOfTodos, setTodos, todo }) => {
   };
 
   return (
-    <div>
+    <div className='TodoItemsContainer'>
       {edit ? (
-        <div id={id} completed={completed}>
+        <div className='todo' id={id} completed={completed}>
           <form>
             <input onChange={handleOnChange} type='text' value={updateInput} />
             <button onClick={handleUpdate}>update</button>
           </form>
         </div>
       ) : (
-        <div id={id} completed={completed}>
-          <h5
+        <div className='todo' id={id} completed={completed}>
+          <p
             style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
           >
             {content}
-          </h5>
-          <button onClick={handleEdit}>edit</button>
-          <button onClick={handleDelete}>delete</button>
-          {todo.completed ? (
-            <button onClick={handleUndo}>undo!</button>
-          ) : (
-            <button onClick={handleCompleted}>completed</button>
-          )}
+          </p>
+          <div className='buttonContainer'>
+            <button className='edit' onClick={handleEdit}>
+              edit
+            </button>
+            <button className='delete' onClick={handleDelete}>
+              delete
+            </button>
+            {todo.completed ? (
+              <button onClick={handleUndo}>undo!</button>
+            ) : (
+              <button className='complete' onClick={handleCompleted}>
+                complete
+              </button>
+            )}
+          </div>
         </div>
       )}
     </div>

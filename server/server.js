@@ -10,8 +10,8 @@ app.use(cors());
 app.use(express.static(__dirname + '/solo-project'));
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.json({ hello: 'from' });
+app.post('/allTodoLists', usersController.getIdOfTodoLists, (req, res) => {
+  res.json(res.locals.arrOfList);
 });
 
 app.post('/signup', usersController.addUser, (req, res) => {
