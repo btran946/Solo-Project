@@ -7,33 +7,40 @@ usersController.addUser = async (req, res, next) => {
   console.log(req.body);
   try {
     if (username && password) {
-      console.log('username/password exist');
-      //   const newUser = new Users(req.body);
-      //   await newUser.save((err, car) => {
-      //     if (err) console.log('could not save');
-      //   });
-      await Users.create(req.body);
-      console.log('user saved');
+      const user = await Users.create(req.body);
       return next();
     } else throw 'ERROR in addUser';
   } catch (err) {
-    return next({ err });
+    return next({
+      log: 'Express error handler caught addUser',
+      status: 500,
+      message: { err: 'An error occurred' },
+    });
   }
 };
 
 usersController.verifyUser = async (req, res, next) => {
-  // write code here
+  console.log(req.body);
   const { username, password } = req.body;
   if (!username || !password)
-    return next('Missing username or password in usersController.verifyUser');
+    return next({
+      log: 'Express error handler caught verifyUser',
+      status: 500,
+      message: { err: 'An error occurred' },
+    });
   try {
-    const userFound = await Users.findOne({ username }).exec();
+    const userFound = await Users.findOne({ username });
     if (!userFound) {
       console.log('user not found in database');
       res.redirect('http://localhost:3000/');
     } else {
-      res.locals.userFound = userFound;
-      return next();
+      if (userFound.password === password) {
+        res.locals.userFound = userFound;
+        return next();
+      } else {
+        console.log('password did not match database');
+        res.redirect('http://localhost:3000/');
+      }
     }
   } catch (err) {
     return next({ err });

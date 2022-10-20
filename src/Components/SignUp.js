@@ -21,13 +21,13 @@ const SignUp = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
     server
-      .post('/', {
+      .post('/signup', {
         username: userName,
         password: passWord,
       })
-      .then((response) => console.log('error in handleSignup'))
+      .then((res) => console.log('hi'))
       .catch((err) => {
-        console.log(err.response.data);
+        console.error(err);
       });
   };
 

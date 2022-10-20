@@ -8,17 +8,18 @@ mongoose
     useUnifiedTopology: true,
     dbName: 'TodoListProject',
   })
-  .then(() => console.log('Connected to Mongo DB'))
   .catch((err) => console.log(err));
+
+mongoose.connection.once('open', () => {
+  console.log('Connected to Database');
+});
 
 const Schema = mongoose.Schema;
 
 const accountsSchema = new Schema({
-  username: String,
-  password: String,
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
 });
-
-const Accounts = mongoose.model('accounts', accountsSchema);
 
 const todoListSchema = new Schema({
   todoList: [
@@ -30,4 +31,4 @@ const todoListSchema = new Schema({
   ],
 });
 
-module.exports = { Accounts };
+module.exports = mongoose.model('Accounts', accountsSchema);
