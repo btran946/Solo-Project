@@ -25,6 +25,10 @@ app.post('/login', usersController.verifyUser, (req, res) => {
   return res.status(200).json(res.locals.userFound);
 });
 
+app.post('/save', usersController.saveTodoList, (req, res) => {
+  return res.status(200);
+});
+
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',

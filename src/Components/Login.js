@@ -6,7 +6,7 @@ const server = axios.create({
   baseURL: 'http://localhost:4000/',
 });
 
-const Login = ({ isLoggedIn, setLoggedIn }) => {
+const Login = ({ isLoggedIn, setLoggedIn, setCurrentUser, currentUser }) => {
   const [usernameLogin, setUsernameLogin] = useState('');
   const [passwordLogin, setPasswordLogin] = useState('');
   const [loginAttempted, setLoginAttempted] = useState(false);
@@ -32,6 +32,7 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
       })
       .then((res) => {
         setLoggedIn(true);
+        setCurrentUser(res.data.username);
       })
       .catch((err) => {
         console.error(err);

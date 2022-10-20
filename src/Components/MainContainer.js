@@ -10,6 +10,7 @@ const MainContainer = () => {
   const [arrOfTodos, setTodos] = useState([]);
   const [todoID, setTodoID] = useState(1);
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState('');
 
   return (
     <div>
@@ -19,6 +20,7 @@ const MainContainer = () => {
           element={
             isLoggedIn ? (
               <Form
+                currentUser={currentUser}
                 todoInput={todoInput}
                 setTodoInput={setTodoInput}
                 arrOfTodos={arrOfTodos}
@@ -27,7 +29,12 @@ const MainContainer = () => {
                 setTodoID={setTodoID}
               />
             ) : (
-              <Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+              <Login
+                setCurrentUser={setCurrentUser}
+                currentUser={currentUser}
+                isLoggedIn={isLoggedIn}
+                setLoggedIn={setLoggedIn}
+              />
             )
           }
         />

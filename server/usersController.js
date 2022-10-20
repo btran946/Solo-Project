@@ -7,7 +7,7 @@ usersController.addUser = async (req, res, next) => {
   console.log(req.body);
   try {
     if (username && password) {
-      const user = await Users.create(req.body);
+      const user = await Users.Account.create(req.body);
       return next();
     } else throw 'ERROR in addUser';
   } catch (err) {
@@ -17,6 +17,18 @@ usersController.addUser = async (req, res, next) => {
       message: { err: 'An error occurred' },
     });
   }
+};
+
+usersController.saveTodoList = async (req, res, next) => {
+  const { username, todoList } = req.body;
+  console.log(req.body);
+  const user = await Users.Account.findOne({ username: username });
+  console.log('user found!');
+  const newTodoList = new Users.TodoList({ listOfTodoLists: todoList });
+  user.todoLists.push(newTodoList);
+  await user.save();
+  console.log('list saved!');
+  next();
 };
 
 usersController.verifyUser = async (req, res, next) => {
@@ -29,13 +41,14 @@ usersController.verifyUser = async (req, res, next) => {
       message: { err: 'An error occurred' },
     });
   try {
-    const userFound = await Users.findOne({ username });
+    const userFound = await Users.Account.findOne({ username });
     if (!userFound) {
       console.log('user not found in database');
       res.redirect('http://localhost:3000/');
     } else {
       if (userFound.password === password) {
         res.locals.userFound = userFound;
+        console.log(userFound);
         return next();
       } else {
         console.log('password did not match database');
@@ -50,7 +63,7 @@ usersController.verifyUser = async (req, res, next) => {
 usersController.getUser = async (req, res, next) => {
   const { username } = req.body;
   try {
-    const foundUser = await Users.findOne({ username }).exec();
+    const foundUser = await Users.Account.findOne({ username }).exec();
     res.locals.foundUser = foundUser;
   } catch (err) {
     console.log('ERROR occured in users.Controller.getUser');

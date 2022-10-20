@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import TodoItems from './TodoItems';
+import axios from 'axios';
+
+const server = axios.create({
+  baseURL: 'http://localhost:4000/',
+});
+
 const Form = ({
   todoInput,
   setTodoInput,
@@ -7,6 +13,7 @@ const Form = ({
   setTodos,
   todoID,
   setTodoID,
+  currentUser,
 }) => {
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -15,12 +22,22 @@ const Form = ({
 
   const handleOnAdd = (e) => {
     e.preventDefault();
-    console.log(arrOfTodos);
     const todo = { content: todoInput, completed: false, id: todoID };
     setTodos([...arrOfTodos, todo]);
     setTodoInput('');
     setTodoID(() => todoID + 1);
-    console.log(arrOfTodos);
+  };
+
+  const handleSave = (e) => {
+    server
+      .post('/save', { username: currentUser, todoList: arrOfTodos })
+      .then((res) => {
+        console.log('list saved');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setTodos([]);
   };
 
   const todos = [];
@@ -60,7 +77,11 @@ const Form = ({
         </div>
       </form>
       <div>{todos}</div>
-      {arrOfTodos.length !== 0 ? <button>Save</button> : <></>}
+      {arrOfTodos.length !== 0 ? (
+        <button onClick={handleSave}>Save</button>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

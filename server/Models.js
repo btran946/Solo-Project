@@ -19,16 +19,22 @@ const Schema = mongoose.Schema;
 const accountsSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  todoLists: [[{ type: Schema.Types.ObjectId, ref: 'TodoList' }]],
+});
+
+// todo: { type: Schema.Types.ObjectId, ref: 'TodoList' },
+const Account = mongoose.model('Account', accountsSchema);
+
+const indvidialTodoSchema = new Schema({
+  content: String,
+  completed: Boolean,
+  id: Number,
 });
 
 const todoListSchema = new Schema({
-  todoList: [
-    {
-      content: String,
-      completed: Boolean,
-      id: Number,
-    },
-  ],
+  listOfTodoLists: [indvidialTodoSchema],
 });
 
-module.exports = mongoose.model('Accounts', accountsSchema);
+const TodoList = mongoose.model('TodoList', todoListSchema);
+
+module.exports = { Account, TodoList };
