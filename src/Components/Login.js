@@ -9,6 +9,7 @@ const server = axios.create({
 const Login = ({ isLoggedIn, setLoggedIn }) => {
   const [usernameLogin, setUsernameLogin] = useState('');
   const [passwordLogin, setPasswordLogin] = useState('');
+  const [loginAttempted, setLoginAttempted] = useState(false);
 
   const handleUsernameInput = (e) => {
     e.preventDefault();
@@ -22,6 +23,8 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
   const handleLogin = (e) => {
     setUsernameLogin('');
     setPasswordLogin('');
+    e.preventDefault();
+    setLoginAttempted(true);
     server
       .post('/login', {
         username: usernameLogin,
@@ -52,7 +55,7 @@ const Login = ({ isLoggedIn, setLoggedIn }) => {
         />
         <button onClick={handleLogin}>Login!</button>
       </form>
-
+      {loginAttempted ? <p>Worst login attempt ever! Try again.</p> : <></>}
       <Link to='/signup'>Sign Up!</Link>
     </div>
   );
