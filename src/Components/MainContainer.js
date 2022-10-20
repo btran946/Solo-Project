@@ -13,7 +13,7 @@ const MainContainer = () => {
   const [currentUser, setCurrentUser] = useState('');
 
   return (
-    <div>
+    <div className='mainContainer'>
       <Routes>
         <Route
           path='/'

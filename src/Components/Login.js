@@ -40,8 +40,11 @@ const Login = ({ isLoggedIn, setLoggedIn, setCurrentUser, currentUser }) => {
   };
 
   return (
-    <div>
-      <form>
+    <div className='login'>
+      <h1>
+        what<a>Todo?</a>
+      </h1>
+      <form className='loginForm'>
         <label htmlFor='usernameLogin'>Username</label>
         <input
           onChange={handleUsernameInput}
@@ -55,9 +58,14 @@ const Login = ({ isLoggedIn, setLoggedIn, setCurrentUser, currentUser }) => {
           type='text'
         />
         <button onClick={handleLogin}>Login!</button>
+        {loginAttempted ? <p>Try again.</p> : <></>}
+        <div className='needAccount'>
+          <p>Need an account?</p>
+          <Link className='signUp' to='/signup'>
+            Sign Up!
+          </Link>
+        </div>
       </form>
-      {loginAttempted ? <p>Worst login attempt ever! Try again.</p> : <></>}
-      <Link to='/signup'>Sign Up!</Link>
     </div>
   );
 };
